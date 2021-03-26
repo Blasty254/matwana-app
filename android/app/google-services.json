@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "18846903558",
+    "project_id": "matwanaapp",
+    "storage_bucket": "matwanaapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:18846903558:android:e216ecc9582f5473374287",
+        "android_client_info": {
+          "package_name": "com.jeffnjogu.matwana_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "18846903558-qn2opsp9bhsonahbpijpa2jltv46c3st.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyANhj1gv2M96XavmZyvgUf1i_ra3zyfvew"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "18846903558-qn2opsp9bhsonahbpijpa2jltv46c3st.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
