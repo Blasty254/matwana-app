@@ -3,7 +3,12 @@
    <application
         android:label="matwana_app"
         android:icon="@mipmap/ic_launcher">
-        <activity
+
+       <meta-data android:name="com.google.android.geo.API_KEY"
+           android:value="AIzaSyBO6ilZXsAurMAEb3WmeHWL3nr4H9QcOOA"/>
+
+
+       <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"
             android:theme="@style/LaunchTheme"
