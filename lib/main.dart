@@ -2,72 +2,30 @@ import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:matwana_app/All%20Screens/LoginScreen.dart';
+import 'package:matwana_app/All%20Screens/RegistrationForms.dart';
+import 'package:matwana_app/All%20Screens/mainscreen.dart';
 
 void main()
 {
-  runApp(MaterialApp(
-    home: Matwanaapp(),
+  runApp(MyApp(
   ));
 }
- class Matwanaapp extends StatelessWidget {
+ class MyApp extends StatelessWidget {
    @override
    Widget build(BuildContext context) {
-     return Scaffold(
-       appBar: AppBar(
-         title: Text("MatwanaApp"),
-         centerTitle: true,
+     return MaterialApp(
+       title: 'Matwana App',
+       theme: ThemeData(
+         fontFamily: "Signatra",
+         primarySwatch: Colors.lightBlue,
+         visualDensity: VisualDensity.adaptivePlatformDensity, 
+
+
        ),
-       drawer: Drawer(
-
-         child:ListView(
-           padding: EdgeInsets.zero,
-           
-           children: <Widget >[
-             DrawerHeader(child: Text('Profile'),
-
-                 decoration :BoxDecoration(
-                    color: Colors.redAccent ,
-
-                 )
-                 
-
-             ),
-
-                 InkWell(
-                   child: ListTile(
-                    title : Text ('Ratings'),
-                     onTap: (){
-                   }
-                   ),
-                 ),
-             ListTile(
-                 title : Text ('Wallet'),
-                 onTap: (){
-                 }
-             ),
-
-             ListTile(
-                 title : Text ('Promotions'),
-                 onTap: (){
-                 }
-             ),
-             ListTile(
-                 onTap: (){
-                   Navigator.pop(context);
-
-                 },
-                 title : Text ('Settings')
-             ),
-
-
-
-           ],
-         ),
-       ),
-
-
+       home: RegistrationScreen(),
+       debugShowCheckedModeBanner: false,
      );
-     
    }
  }
 
