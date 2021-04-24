@@ -34,6 +34,7 @@ dependencies:
   firebase_core: ^1.0.3
   firebase_auth: ^1.0.3
   firebase_database: ^6.1.2
+  fluttertoast: ^8.0.6
 
 
 dev_dependencies:
@@ -61,6 +62,7 @@ flutter:
      - images/desticon1.png
      - images/logo.png
      - images/logo1.png
+     - images/matwanalogo.png
      - images/pickicon.png
      - images/posimarker.png
      - images/redmarker.png
