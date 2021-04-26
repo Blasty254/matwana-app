@@ -4,9 +4,6 @@
         android:label="matwana_app"
         android:icon="@mipmap/ic_launcher">
 
-       <meta-data android:name="com.google.android.geo.API_KEY"
-           android:value="AIzaSyBO6ilZXsAurMAEb3WmeHWL3nr4H9QcOOA"/>
-
 
        <activity
             android:name=".MainActivity"
@@ -42,5 +39,7 @@
         <meta-data
             android:name="flutterEmbedding"
             android:value="2" />
+       <meta-data android:name="com.google.android.geo.API_KEY"
+           android:value="AIzaSyANhj1gv2M96XavmZyvgUf1i_ra3zyfvew"/>
     </application>
 </manifest>

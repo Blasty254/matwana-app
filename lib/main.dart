@@ -1,8 +1,6 @@
-import 'dart:io';
 
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_database/firebase_database.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:matwana_app/All%20Screens/LoginScreen.dart';
 import 'package:matwana_app/All%20Screens/RegistrationForms.dart';
@@ -24,13 +22,13 @@ DatabaseReference userRef = FirebaseDatabase.instance.reference().child("users")
      return MaterialApp(
        title: 'Matwana App',
        theme: ThemeData(
-         fontFamily: "Signatra",
+
          primarySwatch: Colors.lightBlue,
          visualDensity: VisualDensity.adaptivePlatformDensity, 
 
 
        ),
-       initialRoute: LoginScreen.idScreen,
+       initialRoute: MainScreen.idScreen,
        routes: {
          RegistrationScreen.idScreen: (context) => RegistrationScreen(),
          LoginScreen.idScreen: (context) => LoginScreen(),

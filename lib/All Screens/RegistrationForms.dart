@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:matwana_app/All%20Screens/LoginScreen.dart';
 import 'package:matwana_app/All%20Screens/mainscreen.dart';
+import 'package:matwana_app/AllWidgets/progressDialog.dart';
 import 'package:matwana_app/main.dart';
 
 class RegistrationScreen extends StatelessWidget {
@@ -48,13 +49,13 @@ class RegistrationScreen extends StatelessWidget {
                         decoration: InputDecoration(
                             labelText: "Name",
                             labelStyle: TextStyle(
-                              fontSize: 21.0,
+                              fontSize: 25.0,fontFamily: "Signatra",
                             ),
                             hintStyle: TextStyle(
                               color: Colors.blueGrey,
                             )
                         ),
-                        style: TextStyle(fontSize: 14.0),
+                        style: TextStyle(fontSize: 26.0),
 
                       ),
 
@@ -65,13 +66,13 @@ class RegistrationScreen extends StatelessWidget {
                         decoration: InputDecoration(
                             labelText: "Email",
                             labelStyle: TextStyle(
-                              fontSize: 21.0,
+                              fontSize: 25.0,fontFamily: "Signatra",
                             ),
                             hintStyle: TextStyle(
                               color: Colors.blueGrey,
                             )
                         ),
-                        style: TextStyle(fontSize: 14.0),
+                        style: TextStyle(fontSize: 20.0),
 
                       ),
 
@@ -82,13 +83,13 @@ class RegistrationScreen extends StatelessWidget {
                         decoration: InputDecoration(
                             labelText: "Phone Number",
                             labelStyle: TextStyle(
-                              fontSize: 21.0,
+                              fontSize: 25.0,fontFamily: "Signatra",
                             ),
                             hintStyle: TextStyle(
                               color: Colors.blueGrey,
                             )
                         ),
-                        style: TextStyle(fontSize: 14.0),
+                        style: TextStyle(fontSize: 20.0),
 
                       ),
 
@@ -98,13 +99,13 @@ class RegistrationScreen extends StatelessWidget {
                         decoration: InputDecoration(
                             labelText: "Password",
                             labelStyle: TextStyle(
-                              fontSize: 21.0,
+                              fontSize: 25.0,fontFamily: "Signatra",
                             ),
                             hintStyle: TextStyle(
                               color: Colors.blueGrey,
                             )
                         ),
-                        style: TextStyle(fontSize: 14.0),
+                        style: TextStyle(fontSize: 20.0),
 
                       ),
                       SizedBox(height: 20.0,),
@@ -124,12 +125,13 @@ class RegistrationScreen extends StatelessWidget {
                         shape: new RoundedRectangleBorder(
                           borderRadius: new BorderRadius.circular(24.0),
                         ),
-                        onPressed:(){
+                        onPressed:()
+                        {
                           if(nameTextEditingController.text.length <3)
                           {
                             displayToastMessage("name must contain atleast 3 characters", context);
                           }
-                          else if(emailTextEditingController.text.contains("@"))
+                          else if(!emailTextEditingController.text.contains("@"))
                           {
                             displayToastMessage("Email address is not valid", context);
                           }
@@ -137,9 +139,9 @@ class RegistrationScreen extends StatelessWidget {
                           {
                             displayToastMessage("Phone number is required", context);
                           }
-                          if(passwordTextEditingController.text.length <6)
+                          else if(passwordTextEditingController.text.length <6)
                           {
-                            displayToastMessage("Password must be  atleast 7 characters", context);
+                            displayToastMessage("Password must be  atleast 6 characters", context);
                           }
                           else
                             {
@@ -177,11 +179,23 @@ class RegistrationScreen extends StatelessWidget {
 
   void registerNewUser(BuildContext context) async
   {
+    showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (BuildContext context)
+        {
+          return ProgressDialog(message: "Registering.Please wait...",);
+        }
+
+    );
+
+
     final User firebaseUser =(await _firebaseAuth.
     createUserWithEmailAndPassword(
         email: emailTextEditingController.text,
         password: passwordTextEditingController.text
     ).catchError((errMsg){
+      Navigator.pop(context);
       displayToastMessage("Error: " + errMsg.toString(),context);
     })).user;
 
@@ -196,13 +210,14 @@ class RegistrationScreen extends StatelessWidget {
         "phone"  : phoneTextEditingController.text.trim(),
       };
       userRef.child(firebaseUser.uid).set(userDataMap);
-      displayToastMessage("Congratulations!Your account was created successfully", context);
+      displayToastMessage("Congratulations!Your account was created successfully.", context);
       Navigator.pushNamedAndRemoveUntil(context, MainScreen.idScreen, (route) => false);
 
 
     }
     else
       {
+        Navigator.pop(context);
         //error occurred then display message
         displayToastMessage("New user account has not been created", context);
       }
