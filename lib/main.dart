@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:matwana_app/All%20Screens/LoginScreen.dart';
 import 'package:matwana_app/All%20Screens/RegistrationForms.dart';
 import 'package:matwana_app/All%20Screens/mainscreen.dart';
+import 'package:matwana_app/DataHandler/appData.dart';
+import 'package:provider/provider.dart';
 
 void main()async
 {
@@ -19,23 +21,26 @@ DatabaseReference userRef = FirebaseDatabase.instance.reference().child("users")
  class MyApp extends StatelessWidget {
    @override
    Widget build(BuildContext context) {
-     return MaterialApp(
-       title: 'Matwana App',
-       theme: ThemeData(
+     return ChangeNotifierProvider(
+       create: (context)=>AppData(),
+       child: MaterialApp(
+         title: 'Matwana App',
+         theme: ThemeData(
 
-         primarySwatch: Colors.lightBlue,
-         visualDensity: VisualDensity.adaptivePlatformDensity, 
+           primarySwatch: Colors.lightBlue,
+           visualDensity: VisualDensity.adaptivePlatformDensity, 
 
 
+         ),
+         initialRoute: MainScreen.idScreen,
+         routes: {
+           RegistrationScreen.idScreen: (context) => RegistrationScreen(),
+           LoginScreen.idScreen: (context) => LoginScreen(),
+           MainScreen.idScreen: (context) => MainScreen(),
+
+         },
+         debugShowCheckedModeBanner: false,
        ),
-       initialRoute: MainScreen.idScreen,
-       routes: {
-         RegistrationScreen.idScreen: (context) => RegistrationScreen(),
-         LoginScreen.idScreen: (context) => LoginScreen(),
-         MainScreen.idScreen: (context) => MainScreen(),
-
-       },
-       debugShowCheckedModeBanner: false,
      );
    }
  }
