@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:matwana_app/All%20Screens/searchScreen.dart';
 import 'package:matwana_app/AllWidgets/Divider.dart';
 import 'package:matwana_app/Assistants/assistantMethods.dart';
 import 'package:matwana_app/DataHandler/appData.dart';
@@ -49,6 +50,7 @@ class _MainScreenState extends State<MainScreen>
 
   @override
   Widget build(BuildContext context) {
+    
     return Scaffold(
       key: scaffoldKey ,
       appBar: AppBar(
@@ -188,36 +190,44 @@ class _MainScreenState extends State<MainScreen>
                     Text("Hello there,",style: TextStyle(fontSize: 12.0),),
                     Text("Where to?",style: TextStyle(fontSize: 20.0,fontFamily: "Brand Bold"),),
                     SizedBox(height: 20.0,),
-                    Container(
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(5.0),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.black54,
-                            blurRadius: 6.0,
-                            spreadRadius: 0.5,
-                            offset: Offset(0.7,0.7),
-                          )
-                        ],
-                      ),
-                      child: Padding(
-                        padding: const EdgeInsets.all(12.0),
-                        child: Row(
-                          children: [
-                            Icon(Icons.search,color: Colors.blueAccent,),
-                            SizedBox(width: 10.0,),
-                            Text("Search Drop Off")
+                    
+                    GestureDetector(
+                      onTap: ()
+                      {
+                        Navigator.push(context, MaterialPageRoute(builder: (context)=>SearchScreen()));
+                      },
+                      child: Container(
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(5.0),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black54,
+                              blurRadius: 6.0,
+                              spreadRadius: 0.5,
+                              offset: Offset(0.7,0.7),
+                            )
                           ],
                         ),
-                      ),
+                        child: Padding(
+                          padding: const EdgeInsets.all(12.0),
+                          child: Row(
+                            children: [
+                              Icon(Icons.search,color: Colors.blueAccent,),
+                              SizedBox(width: 10.0,),
+                              Text("Search Drop Off")
+                            ],
+                          ),
+                        ),
 
+                      ),
                     ),
                     SizedBox(height:24.0),
                     Row(
+
                       children: [
                         Icon(Icons.home,color: Colors.grey,),
-                        SizedBox(width: 12.0,),
+                        SizedBox(width: 12.0),
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [

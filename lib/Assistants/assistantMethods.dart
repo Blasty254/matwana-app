@@ -19,7 +19,7 @@ class AssistantMethods
         //placeAddress =response["results"][0]["formatted_address"];
         st1 =response["results"][0]["address_components"][0]["long_name"];//eg house number
         st2 =response["results"][0]["address_components"][1]["long_name"];//street number
-        st3 =response["results"][0]["address_components"][2]["long_name"];
+        st3 =response["results"][0]["address_components"][2]["short_name"];
         st4 =response["results"][0]["address_components"][3]["long_name"];
         placeAddress =st1 + "," +st2 + "," + st3 + "," + st4;
 
