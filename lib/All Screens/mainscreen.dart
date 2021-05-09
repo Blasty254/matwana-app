@@ -6,6 +6,7 @@ import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:matwana_app/All%20Screens/searchScreen.dart';
 import 'package:matwana_app/AllWidgets/Divider.dart';
+import 'package:matwana_app/AllWidgets/progressDialog.dart';
 import 'package:matwana_app/Assistants/assistantMethods.dart';
 import 'package:matwana_app/DataHandler/appData.dart';
 import 'package:provider/provider.dart';
@@ -192,9 +193,14 @@ class _MainScreenState extends State<MainScreen>
                     SizedBox(height: 20.0,),
                     
                     GestureDetector(
-                      onTap: ()
+                      onTap: ()async
                       {
-                        Navigator.push(context, MaterialPageRoute(builder: (context)=>SearchScreen()));
+                        var res =Navigator.push(context, MaterialPageRoute(builder: (context)=>SearchScreen()));
+
+                        if(res == "obtainDirection")
+                          {
+                            await getPlaceDirection();
+                          }
                       },
                       child: Container(
                         decoration: BoxDecoration(
@@ -273,4 +279,26 @@ class _MainScreenState extends State<MainScreen>
       ),
     );
   }
+
+  Future<void> getPlaceDirection()async
+  {
+    var initialPos = Provider.of<AppData>(context,listen: false).pickUpLocation;
+    var finalPos = Provider.of<AppData>(context,listen: false).dropOffLocation;
+    
+    var pickUpLapLng = LatLng(initialPos.latitude, initialPos.longitude);
+    var dropOffLapLng = LatLng(finalPos.latitude, finalPos.longitude);
+
+    showDialog(
+        context: context,
+        builder: (BuildContext context) => ProgressDialog(message: "Please wait...",)
+    );
+
+    var details = await AssistantMethods.obtainPlaceDirectionDetails(pickUpLapLng, dropOffLapLng);
+    Navigator.pop(context);
+    
+    print("This is Encoded Points ::");
+    print(details.encodedPoints);
+
+  }
+
 }
