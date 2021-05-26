@@ -33,7 +33,7 @@ class LoginScreen extends StatelessWidget {
                 ),
                 SizedBox(height: 1.0,),
                 Text(
-                  "Login As A Driver",
+                  "Login As A Rider",
                   style: TextStyle(fontSize: 24.0, fontFamily: "Brand Bold"),
                   textAlign: TextAlign.center,
                 ),

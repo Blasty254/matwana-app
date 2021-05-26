@@ -1,11 +1,16 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:matwana_app/Assistants/requestAssistant.dart';
 import 'package:matwana_app/DataHandler/appData.dart';
 import 'package:matwana_app/Models/address.dart';
+import 'package:matwana_app/Models/allUsers.dart';
 import 'package:matwana_app/Models/directDetails.dart';
 import 'package:matwana_app/configMaps.dart';
 import 'package:provider/provider.dart';
+
+
 
 class AssistantMethods
 {
@@ -40,7 +45,7 @@ class AssistantMethods
 
   static Future<DirectionDetails> obtainPlaceDirectionDetails(LatLng initialPosition , LatLng finalPosition)async
   {
-    String directionUrl = "https://maps.googleapis.com/maps/api/directions/json?origin=${initialPosition.latitude},${initialPosition.longitude}&destination=${finalPosition.latitude},${finalPosition.longitude} &key=$mapKey";
+    String directionUrl = "https://maps.googleapis.com/maps/api/directions/json?origin=${initialPosition.latitude},${initialPosition.longitude}&destination=${finalPosition.latitude},${finalPosition.longitude}&key=$mapKey";
 
     var res = await RequestAssistant.getRequest(Uri.parse(directionUrl));
 
@@ -61,4 +66,35 @@ class AssistantMethods
 
     return directionDetails;
   }
+
+  static int calculateFares(DirectionDetails directionDetails)
+  {
+    // in terms of USD
+    double timeTraveledFare = (directionDetails.durationValue/60) * 0.20;
+    double distanceTraveledFare = (directionDetails.distanceValue/1000) * 0.20;
+    double totalFareAmount= timeTraveledFare + distanceTraveledFare;
+
+    //In Local Currency
+    //1$ = 107
+
+    double totalLocalAmount = totalFareAmount * 160;
+
+    return totalFareAmount.truncate();
+  }
+
+  static void getCurrentOnlineUserInfo()async
+  {
+    firebaseUser = await FirebaseAuth.instance.currentUser;
+    String userId = firebaseUser.uid;
+    DatabaseReference reference = FirebaseDatabase.instance.reference().child("users").child(userId);
+
+    reference.once().then((DataSnapshot dataSnapShot)
+    {
+      if(dataSnapShot.value != null)
+        {
+          userCurrentInfo = Users.fromSnapshot(dataSnapShot);
+        }
+    });
+  }
+
 }
